@@ -1,3 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 # Tips
 - <a href="#1">react</a>
 - <a href="#1">redux</a>
