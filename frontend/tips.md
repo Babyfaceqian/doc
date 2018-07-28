@@ -7,6 +7,7 @@
 - <a href="#antd">antd</a>
 
 ### <a name="react">react使用</a>
+官方文档 https://reactjs.org/docs/getting-started.html
 - eslint
 
 在vs code中使用eslint插件，可以实时提醒代码是否符合规范
