@@ -1,5 +1,3 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
 # Tips
 - <a href="#1">react</a>
 - <a href="#1">redux</a>
@@ -7,8 +5,6 @@
 - <a href="#1">svg</a>
 - <a href="#1">d3</a>
 - <a href="#antd">antd</a>
-
-
 ### <a name="antd">antd使用</a>
 - antd table组件启用表体滚动时列不对齐问题的解决方案
 
