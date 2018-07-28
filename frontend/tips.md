@@ -36,6 +36,7 @@ this.setState((prevState, nextState) => {
 - small component
   
 尽量将组件拆分成多个小组件，便于阅读、重用、单元测试。
+### <a name="d3">d3使用</a>
 
 ### <a name="antd">antd使用</a>
 - antd table组件启用表体滚动时列不对齐问题的解决方案
