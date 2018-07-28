@@ -41,6 +41,7 @@ this.setState((prevState, nextState) => {
 官方文档 https://github.com/d3/d3/wiki
 
 ### <a name="antd">antd使用</a>
+官方文档 https://ant.design/docs/react/introduce-cn
 - antd table组件启用表体滚动时列不对齐问题的解决方案
 
 table组件在启用表体滚动时，也就是```overflow-y: scroll```，滚动条会占用表体的宽度，导致表体单元格宽度减小，而表头单元格宽度不变，从而导致表头与内容之间出现不对齐的现象。解决方案是，对表头也设置滚动，然后通过设置```margin-right: -20px;padding-right: 20px```来隐藏滚动条。
