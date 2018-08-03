@@ -4,17 +4,17 @@
 - <a href="#1">redux-saga</a>
 - <a href="#1">svg</a>
 - <a href="#1">d3</a>
-- <a href="#antd">antd</a>
+- <a href="#antd">antd</a>
 - <a href="#css">css</a>
 *****
 ### <a name="react">react使用</a>
 官方文档 https://reactjs.org/docs/getting-started.html
 - eslint
 
-    在vs code中使用eslint插件，可以实时提醒代码是否符合规范
-- stateless component vs pure component vs state component
+    在vs code中使用eslint插件，可以实时提醒代码是否符合规范
+- stateless component vs pure component vs state component
 
-    按照此优先级使用component类型， 如果不需要存储状态和生命周期函数，可以使用stateless component；如果不需要deep checking props，可以使用pure component。
+    按照此优先级使用component类型， 如果不需要存储状态和生命周期函数，可以使用stateless component；如果不需要deep checking props，可以使用pure component。
 - 三目运算符
 
     尽量使用三目运算符代替if函数，三目运算符也可以在jsx中编写用于控制组件的加载条件。
@@ -27,9 +27,9 @@
 - bind this
 
     使用箭头函数绑定组件的`this`对象，如果无法使用箭头函数则在`constructor`函数中绑定，注意需要先写`super()`。
-- setState
+- setState
   
-    `setState`是异步调用函数，如果想要同时使用相应的`state`，应该使用如下方式。
+    `setState`是异步调用函数，如果想要同时使用相应的`state`，应该使用如下方式。
     ```
     this.setState((prevState, nextState) => {
     loading: !nextState.loading
@@ -75,9 +75,34 @@
 ### <a name="css">css</a>
 - BFC
   
-教程网址：https://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
-    
-    
-    BFC， 块级格式化上下文。生成条件如下：
-    > 
+    教程网址：https://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
+    - Box: CSS布局的基本单位
+
+        - block-level box：display属性为block，list-item，table的元素，会生成block-level box，并且会参与block formatting context。
+        - inline-level box：display属性为inline，inline-block， inline-table的元素，会生成inline-level box，并且会参与inline formatting context。
+        - run-in box：
+
+    - Formatting Context
+
+        Formatting context 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。最常见的 Formatting context 有 Block fomatting context (简称BFC)和 Inline formatting context (简称IFC)。
+
+        CSS2.1 中只有 BFC 和 IFC, CSS3 中还增加了 GFC 和 FFC。
+    - BFC布局
+
+        BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
+
+    - BFC布局规则
+
+        - 内部的Box会在垂直方向，一个接一个地放置。
+        - Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠
+        - 每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。
+        - BFC的区域不会与float box重叠。
+        - BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
+        - 计算BFC的高度时，浮动元素也参与计算
+    - BFC生成条件（任意一个）
+        - 根元素
+        - float属性不为none
+        - position为absolute或fixed
+        - display为inline-block, table-cell, table-caption, flex, inline-flex
+        - overflow不为visible
 
