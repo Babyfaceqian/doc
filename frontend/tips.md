@@ -42,19 +42,19 @@
 - 组件嵌套
 
     教程网址： https://youtu.be/YaZg8wg39QQ
-    - Circle
+    - **Circle**
 
         Stateful Component
-    - Small Circle
+    - **Small Circle**
 
         Stateless Component
-    - Small Circle in Circle
+    - **Small Circle in Circle**
 
         Container Component
-    - Small Circle in Circle in Dotted Circle
+    - **Small Circle in Circle in Dotted Circle**
         
         Higher-Order Component
-    - Small Circle in Dashed Circle in Circle
+    - **Small Circle in Dashed Circle in Circle**
 
         
 
@@ -73,13 +73,13 @@
 - form 表单使用
 *******
 ### <a name="css">css</a>
-- BFC
+- **BFC**
   
     教程网址：https://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
-    - Box: CSS布局的基本单位
+    - **Box**: CSS布局的基本单位
 
         - block-level box：display属性为block，list-item，table的元素，会生成block-level box，并且会参与block formatting context。
-        - inline-level box：display属性为inline，inline-block， inline-table的元素，会生成inline-level box，并且会参与inline formatting context。
+        - inline-level box：display属性为inline，inline-block， inline-table的元素，会生成inline-level box，并且会参与inline formatting context。
         - run-in box：
 
     - Formatting Context
@@ -87,11 +87,11 @@
         Formatting context 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。最常见的 Formatting context 有 Block fomatting context (简称BFC)和 Inline formatting context (简称IFC)。
 
         CSS2.1 中只有 BFC 和 IFC, CSS3 中还增加了 GFC 和 FFC。
-    - BFC布局
+    - **BFC**布局
 
         BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，并且与这个区域外部毫不相干。
 
-    - BFC布局规则
+    - **BFC**布局规则
 
         - 内部的Box会在垂直方向，一个接一个地放置。
         - Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠
@@ -99,7 +99,7 @@
         - BFC的区域不会与float box重叠。
         - BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。
         - 计算BFC的高度时，浮动元素也参与计算
-    - BFC生成条件（任意一个）
+    - **BFC**生成条件（任意一个）
         - 根元素
         - float属性不为none
         - position为absolute或fixed
