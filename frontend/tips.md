@@ -31,7 +31,7 @@
 - setState
   
     `setState`是异步调用函数，如果想要同时使用相应的`state`，应该使用如下方式。
-    ```
+    ```js
     this.setState((prevState, nextState) => {
     loading: !nextState.loading
     });
@@ -71,6 +71,57 @@
 
     table组件在启用表体滚动时，也就是`overflow-y: scroll`，滚动条会占用表体的宽度，导致表体单元格宽度减小，而表头单元格宽度不变，从而导致表头与内容之间出现不对齐的现象。解决方案是，对表头也设置滚动，然后通过设置`margin-right: -20px;padding-right: 20px`来隐藏滚动条。
 
+- antd table组件自适应高度
+
+    该组件默认高度由固定行高撑起，如果需要让表格高度自适应屏幕高度，需要一层层修改表格的css样式，即让表格各层标签的高度按父元素高度的百分比来设定，这样整个表体的高度就会适应屏幕的高度。
+
+- antd（2.x） Form组件用getFieldDecorator绑定表单域名重复的问题
+
+    当有两个子表单表单域名类型相同、名字相同时，如
+
+    ```js
+    /*子表单1*/
+        getFieldDecorator('fieldA', {
+                            rules: [{ required: true, whitespace: true }],
+                            initialValue: undefined
+                        })
+
+        ... ...
+    /*子表单2*/
+
+        getFieldDecorator('fieldA', {
+                            rules: [{ required: true, whitespace: true }],
+                            initialValue: undefined
+                        })
+    ```
+    父表单在切换子表单后原表单的该表单域在初始化时生成的fieldMeta对象会影响当前子表单该表单域。如当前子表单还会沿用原表单的rules配置。
+    当第一个表单域名字类型为数组，即field[1]，第二个表单域名字类型为字符串，即field时，第一个表单域初始化时生成的fieldMeta对象中的virtual值为true，将会影响到第二个表单域更改时获取方式。导致第二个表单域无法完成更改，并且一直处于validating中（组件效果是右侧一直有loading图标）。
+    ```js
+
+    /*createFieldsStore.js*/
+    function getValueFromFields(name, fields) {
+      var _this2 = this;
+
+      var fieldsMeta = this.fieldsMeta;
+    /*virtual为true，认为fieldA是数组类型*/
+      if (fieldsMeta[name] && fieldsMeta[name].virtual) {   
+        var ret = {};
+        Object.keys(fieldsMeta).forEach(function (fieldKey) {
+          var nameIfNested = getNameIfNested(fieldKey);
+          if (nameIfNested.name === name && nameIfNested.isNested) {
+            set(ret, fieldKey, _this2.getValueFromFieldsInternal(fieldKey, fields));
+          }
+        });
+        /*走到这里，返回的是undefined*/
+        return ret[name];
+      }
+      /*正常情况下会走到这里，返回正确的值*/
+      return this.getValueFromFieldsInternal(name, fields);
+    }
+  }
+    ```
+
+    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。
 - form 表单使用
 *******
 ### <a name="css">css</a>
