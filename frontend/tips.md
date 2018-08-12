@@ -58,8 +58,61 @@
     - **Small Circle in Dashed Circle in Circle**
 
         
+- refs
 
-    
+    当父组件需要获取子组件并获取或设置子组件属性时，可通过给子组件添加ref属性的方式关联到父组件。
+    - 旧版方式（不推荐，可能将来会被废弃）
+
+    原因： https://github.com/facebook/react/issues/1373
+
+    ```js
+    class CustomTextInput extends React.Component {
+  
+    componentDidMount() {
+        // 渲染后文本框自动获得焦点
+
+        this.refs.inputRef.focus(); // 子组件中传入字符串，在父组件的refs对象中获取到子组件。
+    }
+
+    render() {
+        return (
+        <div>
+            <input
+            type="text"
+            ref="inputRef"
+            />
+        </div>
+        );
+    }
+    }
+    ```
+    - 新版方式
+
+     ```js
+    class CustomTextInput extends React.Component {
+  
+    componentDidMount() {
+        // 渲染后文本框自动获得焦点
+
+        this.inputReference.focus(); 
+    }
+
+    inputRef = (element) => {
+        this.inputReference = element; // 传入回调，并获取到子组件。
+    }
+
+    render() {
+        return (
+        <div>
+            <input
+            type="text"
+            ref={this.inputRef}
+            />
+        </div>
+        );
+    }
+    }
+    ```
     
 ******
 ### <a name="d3">d3使用</a>
