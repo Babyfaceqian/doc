@@ -6,6 +6,7 @@
 - <a href="#1">d3</a>
 - <a href="#antd">antd</a>
 - <a href="#css">css</a>
+- <a href="#html">html</a>
 
 *****
 ### <a name="react">react使用</a>
@@ -174,7 +175,7 @@
   }
     ```
 
-    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。
+    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。第二种解决办法是为子表单绑定自己的form，用refs来引用子表单的form对象进行处理。
 - form 表单使用
 *******
 ### <a name="css">css</a>
@@ -211,3 +212,28 @@
         - display为inline-block, table-cell, table-caption, flex, inline-flex
         - overflow不为visible
 
+*******
+### <a name="#html">html</a>
+- 在网页上添加锚点，点击链接后跳转到页面对应锚点位置。需要注意的是点击链接会改变路由的地址。
+    
+    ```html
+    <a href="#mylink">my link</a>
+    ... ...
+    <div id="mypage">
+        <a name="mylink">jump here</a>
+    </div>
+    ```
+
+    如果要实现滚动页面的同时，导航栏也跟着滚动到对应的链接，需要监听页面的onscroll事件，比较简便的方法是
+    ```js
+    import $ from 'jquery';
+    $('#mypage').onscroll = () => {
+        // 获取锚点到页面顶部的距离，判断是否需要改变链接高亮
+    } 
+    ```
+
+    通过判断锚点到页面顶部的距离会有一个bug，就是当点击导航栏某个链接时，页面滚动到相应的位置并且触发onscroll事件，如果此时页面内出现多个锚点，满足条件的锚点又有多个，此时高亮的链接可能会变成最后满足条件的锚点所对应的链接。即点击了链接一，结果链接二亮了。
+
+    **解决方案**
+
+    设定锚点到页面顶部的距离，确保在该距离内最多只会出现一个锚点；增加最后一个锚点后面内容高度，使其能够出现在页面顶部并满足条件。
