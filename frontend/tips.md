@@ -28,7 +28,7 @@
     在编辑器使用snippet插件。
 - bind this
 
-    使用箭头函数绑定组件的`this`对象，如果无法使用箭头函数则在`constructor`函数中绑定，注意需要先写`super()`。
+    使用箭头函数绑定组件的`this`对象，如果无法使用箭头函数则在`constructor`函数中绑定，注意需要先写`super()`。如果将箭头函数写在组件上，每次渲染该组件时都会传入一个新的函数，可能会引起额外的渲染。另一种方法是使用autobind库，作用和在constructor里单独写一样。
 - setState
   
     `setState`是异步调用函数，如果想要同时使用相应的`state`，应该使用如下方式。
@@ -114,7 +114,91 @@
     }
     }
     ```
+
+- pure/impure function
+  
+    ```js
+    function sum(a, b) {
+        return a + b;
+    }
+    ```
+
+    >Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs.
+
+    >In contrast, this function is impure because it changes its own input:
+    ```js
+    function withdraw(account, amount) {
+        account.total -= amount;
+    }
+    ```
+
+    >All React components must act like pure functions with respect to their props.
+
+- React组件的生命周期
+
+    **加载时** 
+
+    1. constructor()
+    2. componentWillMount()
+    3. render(), 如果渲染子组件，子组件也会走一遍这个流程，所有子组件都componentDidMount()完了才会到下一步
+    4. componentDidMount()
+
+    **更新时**
     
+    1. componentWillReceiveProps(), 只有props改变才会触发。
+    2. shouldComponentUpdate(), 必须返回true或false
+    3. componentWillUpdate()
+    4. render()，如果渲染子组件，子组件也会走一遍这个流程，所有子组件都componentDidMount()完了才会走到下一步
+    5. componentDidUpdate()
+
+    **移除时**
+
+    1. componentWillUnmount()
+
+- setState
+
+    > That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument:
+
+    ```js
+    this.setState((state, props) => ({
+        counter: state.counter + props.increment
+    }));
+
+    ```
+
+- SyntheticEvent
+
+    > The SyntheticEvent is pooled. This means that the SyntheticEvent object will be reused and all properties will be nullified after the event callback has been invoked. This is for performance reasons. As such, you cannot access the event in an asynchronous way.
+    
+    ```js
+
+    function onClick(event) {
+      console.log(event); // => nullified object.
+      console.log(event.type); // => "click"
+      const eventType = event.type; // => "click"
+
+      setTimeout(function() {
+        console.log(event.type); // => null
+        console.log(eventType); // => "click"
+      }, 0);
+
+      // Won't work. this.state.clickEvent will only contain null values.
+      this.setState({clickEvent: event});
+
+      // You can still export event properties.
+      this.setState({eventType: event.type});
+    }
+    ```
+
+    简单来讲，React中的合成事件是共用的，这就意味着事件对象会被复用。在什么时候被复用呢？在每次事件处理函数执行完后，事件对象属性会被重置，这时候就会被复用了。所以为了在事件处理函数内拿到正确的事件对象或对象内的值，在事件处理函数中不要异步使用event，如果要使用，请使用event缓存后的对象或值。或者
+
+    > Note:
+If you want to access the event properties in an asynchronous way, you should call event.persist() on the event, which will remove the synthetic event from the pool and allow references to the event to be retained by user code.
+
+- Keys
+  
+  React中遍历出来的组件必须都加上key，且保证key值unique，用于区分组件。特别是在对组件进行排序，修改的时候。
+
 ******
 ### <a name="d3">d3使用</a>
 官方文档 https://github.com/d3/d3/wiki
