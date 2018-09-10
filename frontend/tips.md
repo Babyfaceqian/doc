@@ -7,6 +7,7 @@
 - <a href="#antd">antd</a>
 - <a href="#css">css</a>
 - <a href="#html">html</a>
+- <a href="#webComponent">web component</a>
 
 *****
 ### <a name="react">react使用</a>
