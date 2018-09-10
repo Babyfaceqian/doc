@@ -115,6 +115,41 @@
     }
     ```
 
+    - 16.3及以上版本增加createRef、forwardRef方法，回调方法还是可以使用
+
+    ```js
+    class Child extends React.Component{
+      constructor(props){
+        super(props);
+        this.myRef=React.createRef();
+        //React16.3中创建Ref的方法
+      }
+      render(){
+        return <input ref={this.myRef}/>
+      }
+    }
+    ```
+
+    ```js
+    // 创建子组件
+    const Child=React.forwardRef((props,ref)=>(
+      <input ref={ref} />
+    ));
+    // 在父组件中传入ref
+    class Father extends React.Component{
+    constructor(props){
+      super(props);
+      this.myRef=React.createRef();
+    }
+    componentDidMount(){
+      console.log(this.myRef.current);  // 打印出的是input
+    }
+    render(){
+      return <Child ref={this.myRef}/>
+    }
+    }
+    ```
+
 - pure/impure function
   
     ```js
@@ -198,6 +233,102 @@ If you want to access the event properties in an asynchronous way, you should ca
 - Keys
   
   React中遍历出来的组件必须都加上key，且保证key值unique，用于区分组件。特别是在对组件进行排序，修改的时候。
+
+- uncontrolled component
+
+    > In React, an `<input type="file" />` is always an uncontrolled component because its value can only be set by a user, and not programmatically.\
+    > You should use the File API to interact with the files. The following example shows how to create a ref to the DOM node to access file(s) in a submit handler
+
+- context
+
+    使用context api时需要注意以下几点：
+
+    - Provider写在父组件，Consumer写在子组件
+    - One issue with the render prop API is that refs don’t automatically get passed to wrapped elements. To get around this, use React.forwardRef
+
+        ```js
+        export default React.forwardRef((props, ref) => (
+          <ThemeContext.Consumer>
+            {theme => (
+              <FancyButton {...props} theme={theme} ref={ref} />
+            )}
+          </ThemeContext.Consumer>
+        ));
+        ```
+
+- Error Boundaries
+
+    错误边界，componentDidCatch(error, info)
+    > Error boundaries are React components that **catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI** instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+
+
+    > **Note**\
+    Error boundaries do **not** catch errors for:
+    Event handlers (learn more)
+    Asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks)
+    Server side rendering
+    Errors thrown in the error boundary itself (rather than its children)
+
+- Fragments
+
+    > A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.\
+    > key is the only attribute that can be passed to Fragment
+    ```js
+    render() {
+      return (
+        <React.Fragment>
+          <ChildA />
+          <ChildB />
+          <ChildC />
+        </React.Fragment>
+      );
+    }
+    // or
+    render() {
+        return (
+            <>
+              <ChildA />
+              <ChildB />
+              <ChildC />
+            </>
+        );
+    }
+    ```
+
+- HOC
+
+   - Where to apply?
+    > apply HOCs **outside the component definition** so that the resulting component is created only once.\
+    In those rare cases where you need to apply a HOC dynamically, you can also do it **inside a component’s lifecycle methods or its constructor**.
+
+    - Static Method
+
+    用高阶组件wrap得到的新组件不会拥有旧组件的静态方法，需要手动在高阶组件中copy，或使用`hoist-non-react-statics`库自动copy所有旧组件的静态方法。
+    > Another possible solution is to export the static method separately from the component itself.
+
+    - ref
+
+    用高阶组件wrap得到的新组件不会拥有旧组件的ref。可以通过forwardRef方法传递。
+
+- Why we have to import React in our files?
+
+    If we use JSX  which is a syntactic sugar and will be converted to `React.createElement(...)`, we need to import React.Or we loaded React from `<script>` tag.
+
+- Props Default to “True”
+- Booleans, Null, and Undefined Are Ignored in Render
+    > One caveat is that some “falsy” values, such as the 0 number, are still rendered by React. \
+    If you want a value like false, true, null, or undefined to appear in the output, you have to convert it to a string first.
+
+- Optimizing Performance
+
+    > **Virtualize Long Lists**\
+    If your application renders long lists of data (hundreds or thousands of rows), we recommended using a technique known as “windowing”. This technique only renders a small subset of your rows at any given time, and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created.\
+    `react-window` and `react-virtualized` are popular windowing libraries. They provide several reusable components for displaying lists, grids, and tabular data. You can also create your own windowing component, like Twitter did, if you want something more tailored to your application’s specific use case.
+
+- Immutable.js
+- ReactDOM.createPortal(child, container)
+
+    可以在任意dom元素下插入child元素，冒泡事件还是遵循JSX中的结构。
 
 ******
 ### <a name="d3">d3使用</a>
