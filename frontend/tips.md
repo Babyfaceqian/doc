@@ -108,7 +108,7 @@
         <div>
             <input
             type="text"
-            ref={this.inputRef}
+            ref={this.inputRef}
             />
         </div>
         );
@@ -244,7 +244,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     使用context api时需要注意以下几点：
 
-    - Provider写在父组件，Consumer写在子组件
+    - Provider写在父组件，Consumer写在子组件
     - One issue with the render prop API is that refs don’t automatically get passed to wrapped elements. To get around this, use React.forwardRef
 
         ```js
@@ -391,7 +391,7 @@ If you want to access the event properties in an asynchronous way, you should ca
   }
     ```
 
-    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。第二种解决办法是为子表单绑定自己的form，用refs来引用子表单的form对象进行处理。
+    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。第二种解决办法是为子表单绑定自己的form，用refs来引用子表单的form对象进行处理。
 - form 表单使用
 *******
 ### <a name="css">css</a>
