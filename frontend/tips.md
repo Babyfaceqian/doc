@@ -343,7 +343,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
 - antd table组件自适应高度
 
-    该组件默认高度由固定行高撑起，如果需要让表格高度自适应屏幕高度，需要一层层修改表格的css样式，即让表格各层标签的高度按父元素高度的百分比来设定，这样整个表体的高度就会适应屏幕的高度。
+    该组件默认高度由固定行高撑起，如果需要让表格高度自适应屏幕高度，需要一层层修改表格的css样式，即让表格各层标签的高度按父元素高度的百分比来设定，这样整个表体的高度就会适应屏幕的高度。
 
 - antd（2.x） Form组件用getFieldDecorator绑定表单域名重复的问题
 
@@ -442,7 +442,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     如果要实现滚动页面的同时，导航栏也跟着滚动到对应的链接，需要监听页面的onscroll事件，比较简便的方法是
     ```js
-    import $ from 'jquery';
+    import $ from 'jquery';
     $('#mypage').onscroll = () => {
         // 获取锚点到页面顶部的距离，判断是否需要改变链接高亮
     } 
