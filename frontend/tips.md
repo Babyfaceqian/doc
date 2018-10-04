@@ -431,6 +431,11 @@ If you want to access the event properties in an asynchronous way, you should ca
         - display为inline-block, table-cell, table-caption, flex, inline-flex
         - overflow不为visible
 
+- **滤镜属性**
+    
+    - filter
+    - backdrop-filter: blur(4px) 可实现模糊图层
+
 *******
 ### <a name="#html">html</a>
 - 在网页上添加锚点，点击链接后跳转到页面对应锚点位置。需要注意的是点击链接会改变路由的地址。
