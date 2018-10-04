@@ -108,7 +108,7 @@
         <div>
             <input
             type="text"
-            ref={this.inputRef}
+            ref={this.inputRef}
             />
         </div>
         );
@@ -244,7 +244,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     使用context api时需要注意以下几点：
 
-    - Provider写在父组件，Consumer写在子组件
+    - Provider写在父组件，Consumer写在子组件
     - One issue with the render prop API is that refs don’t automatically get passed to wrapped elements. To get around this, use React.forwardRef
 
         ```js
@@ -346,7 +346,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
 - antd table组件自适应高度
 
-    该组件默认高度由固定行高撑起，如果需要让表格高度自适应屏幕高度，需要一层层修改表格的css样式，即让表格各层标签的高度按父元素高度的百分比来设定，这样整个表体的高度就会适应屏幕的高度。
+    该组件默认高度由固定行高撑起，如果需要让表格高度自适应屏幕高度，需要一层层修改表格的css样式，即让表格各层标签的高度按父元素高度的百分比来设定，这样整个表体的高度就会适应屏幕的高度。
 
 - antd（2.x） Form组件用getFieldDecorator绑定表单域名重复的问题
 
@@ -394,7 +394,7 @@ If you want to access the event properties in an asynchronous way, you should ca
   }
     ```
 
-    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。第二种解决办法是为子表单绑定自己的form，用refs来引用子表单的form对象进行处理。
+    解决办法就是避免重复命名，可以为不同表单的表单域名加前缀，然后在父组件的handleSubmit函数中统一作处理。第二种解决办法是为子表单绑定自己的form，用refs来引用子表单的form对象进行处理。
 - form 表单使用
 *******
 ### <a name="css">css</a>
@@ -445,7 +445,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     如果要实现滚动页面的同时，导航栏也跟着滚动到对应的链接，需要监听页面的onscroll事件，比较简便的方法是
     ```js
-    import $ from 'jquery';
+    import $ from 'jquery';
     $('#mypage').onscroll = () => {
         // 获取锚点到页面顶部的距离，判断是否需要改变链接高亮
     } 
@@ -456,4 +456,3 @@ If you want to access the event properties in an asynchronous way, you should ca
     **解决方案**
 
     设定锚点到页面顶部的距离，确保在该距离内最多只会出现一个锚点；增加最后一个锚点后面内容高度，使其能够出现在页面顶部并满足条件。
-
