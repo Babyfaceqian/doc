@@ -434,7 +434,11 @@ If you want to access the event properties in an asynchronous way, you should ca
 - **滤镜属性**
     
     - filter
-    - backdrop-filter: blur(4px) 可实现模糊图层
+    - backdrop-filter: blur(4px) 可实现模糊图层，浏览器支持有限，chrome需要开启实验功能。
+
+- **clip和clip-path**
+
+    用于裁剪元素，可以裁剪出不同形状的元素。后者是前者的替代，后者不支持IE浏览器
 
 *******
 ### <a name="#html">html</a>
