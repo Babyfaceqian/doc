@@ -7,6 +7,7 @@
 - <a href="#antd">antd</a>
 - <a href="#css">css</a>
 - <a href="#html">html</a>
+- <a href="#http">http</a>
 - <a href="#webComponent">web component</a>
 
 *****
@@ -331,6 +332,26 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     可以在任意dom元素下插入child元素，冒泡事件还是遵循JSX中的结构。
 
+- 组件间通信
+
+  1. 父组件向子组件
+        
+        props   
+  2. 子组件向父组件
+
+        回调函数
+
+        自定义事件机制
+  3. 跨级组件
+
+        层层传递props
+
+        context（不建议）
+  4. 没有嵌套关系的组件
+
+        自定义事件机制
+
+    当业务逻辑复杂到一定程度，可以考虑引入redux·
 ******
 ### <a name="d3">d3使用</a>
 官方文档 https://github.com/d3/d3/wiki
@@ -434,7 +455,7 @@ If you want to access the event properties in an asynchronous way, you should ca
 - **滤镜属性**
     
     - filter
-    - backdrop-filter: blur(4px) 可实现模糊图层，浏览器支持有限，chrome需要开启实验功能。
+    - backdrop-filter: blur(4px) 可实现模糊图层，浏览器支持有限，safari完美支持，IE不支持，chrome需要开启实验功能。
 
 - **clip和clip-path**
 
@@ -465,3 +486,23 @@ If you want to access the event properties in an asynchronous way, you should ca
     **解决方案**
 
     设定锚点到页面顶部的距离，确保在该距离内最多只会出现一个锚点；增加最后一个锚点后面内容高度，使其能够出现在页面顶部并满足条件。
+
+*******
+### <a name="#http">http</a>
+- Restful API
+
+    1. URL设计
+        1. 动词+宾语,比如GET /articles
+        2. 动词的覆盖，有些客户端只能使用GET和POST方法。服务器必须接受POST方法模拟其他三种方法（PUT、PATCH、DELETE）。这时客户端发出的 HTTP 请求，要加上X-HTTP-Method-Override属性，告诉服务器应该使用哪一个动词，覆盖POST方法。
+        3. 宾语必须是名词
+    2. 状态码
+        1. 1xx：相关信息
+        2. 2xx：操作成功
+        3. 3xx：重定向
+        4. 4xx：客户端错误
+        5. 5xx：服务器错误
+    3. 服务器响应
+        1. 不要返回纯文本，而是返回json格式
+        2. 发生错误时不要返回200状态码
+        3. 提供链接，HATEOAS
+  
