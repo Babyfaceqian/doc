@@ -487,6 +487,25 @@ If you want to access the event properties in an asynchronous way, you should ca
 
     设定锚点到页面顶部的距离，确保在该距离内最多只会出现一个锚点；增加最后一个锚点后面内容高度，使其能够出现在页面顶部并满足条件。
 
+- html5新特性：data-*
+
+可以为html5元素添加data-*属性用于存储自定义信息。有以下几种访问该属性的方法。
+
+1. getAttribute()
+2. element.dataset()
+3. $().data('*')
+4. css: 
+
+```css
+article::before {
+    content: attr(data-category);
+}
+
+article[data-author='1'] {
+    border-width: 1px;
+}
+```
+
 *******
 ### <a name="#http">http</a>
 - Restful API
