@@ -14,6 +14,7 @@
 - git reset --soft <commit记录> 将某个commit记录退回到暂存区
 - git checkout -- <文件> 将某个改动的文件丢弃
 - git remote show 查看当前仓库
+- git remote update origin -p 更新远程仓库
 - git remote get-url --all <仓库名> 查看远程仓库地址
 - git pull <远程仓库> <分支名> 拉取某个分支的代码
 - git pull === git fetch + git merge
