@@ -79,6 +79,10 @@ $ git clone git@github.com:Babyfaceqian/zhangqiantech.git
 ```vim
 $ travis login
 ```
+生成id_rsa
+```vim
+$ ssh-keygen -t rsa -C "babyfaceqian92@gmail.com"
+```
 cd到仓库根目录，执行下面的语句，作用是将用于免密登陆的id_rsa也就是私钥加密保存到仓库里面，travis虚拟服务器尝试登陆的时候会通过该私钥登陆到部署服务器。
 ```vim
 $ travis encrypt-file ~/.ssh/id_rsa --add
@@ -91,12 +95,14 @@ Make sure to add id_rsa.enc to the git repository.
 Make sure not to add ~/.ssh/id_rsa to the git repository.
 Commit all changes to your .travis.yml.
 ```
+复制id_rsa.pub到同目录authorized_keys
 执行完后 `.travis.yml` 的 `before-install` 下会增加一行内容。
 ```yml
 before_install:
   - openssl aes-256-cbc -K $encrypted_d89376f3278d_key -iv $encrypted_d89376f3278d_iv
   -in id_rsa.enc -out ~\/.ssh/id_rsa -d
 ```
+这里要注意的一点是，如果是linux服务器，需要将以上id_rsa的路径修改为`~/.ssh/id_rsa`，不然后面找不到这个文件。
 为了保证权限正常，还需要添加一行内容。
 ```yml
 - chmod 600 ~/.ssh/id_rsa
